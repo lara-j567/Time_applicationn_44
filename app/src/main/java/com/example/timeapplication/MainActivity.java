@@ -2,6 +2,7 @@ package com.example.timeapplication;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
@@ -22,7 +23,8 @@ public class MainActivity extends AppCompatActivity {
     private Button btn_add;
     private ListView lv;
     ArrayList<Time> timeList = new ArrayList<Time>();
-    //DatabaseHelper db;
+    ArrayList<Time> DBtimeList = new ArrayList<Time>();
+    DatabaseHelper dbObj;
     SQLiteOpenHelper openHelper;
     SQLiteDatabase db;
 
@@ -31,6 +33,21 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        openHelper = new DatabaseHelper(this);
+        lv = findViewById(R.id.countryListView);
+        dbObj = new DatabaseHelper(this);
+        btn_add = findViewById(R.id.btnAdd);
+
+        btn_add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(MainActivity.this , AllTime.class);
+                startActivity(intent);
+
+            }
+        });
+
 
         populateData();
 
@@ -42,29 +59,51 @@ public class MainActivity extends AppCompatActivity {
     private void insertData(String name, String time) {
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(DatabaseHelper.COL2,name);
-        contentValues.put(DatabaseHelper.COL3,time);
-        long id=db.insert(DatabaseHelper.TABLE_NAME,null , contentValues);
+        contentValues.put(DatabaseHelper.COL2, name);
+        contentValues.put(DatabaseHelper.COL3, time);
+        long id = db.insert(DatabaseHelper.TABLE_NAME, null, contentValues);
 
 
-        if(id == -1){
+        if (id == -1) {
 
-            Toast.makeText(this, "data write failed", Toast.LENGTH_SHORT).show();
+            // Toast.makeText(this, "data write failed", Toast.LENGTH_SHORT).show();
 
+        } else {
+
+
+            //Toast.makeText(this, "data write successful", Toast.LENGTH_SHORT).show();
         }
-
-        else{
-
-
-            Toast.makeText(this, "data write successful", Toast.LENGTH_SHORT).show();
-        }
-
-
 
 
     }
 
     private void setUpList(ArrayList<Time> list) {
+
+        Cursor data = dbObj.getTimesList();
+        if (data.getCount() == 0) {
+            Toast.makeText(this, "from local list", Toast.LENGTH_SHORT).show();
+
+            Adapter time_adapter = new Adapter(this, 0, list);
+            lv.setAdapter(time_adapter);
+        } else {
+
+            while (data.moveToNext()) {
+
+                String name = data.getString(1);
+                String time = data.getString(2);
+               // Toast.makeText(this, name, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, time, Toast.LENGTH_SHORT).show();
+                Time temp = new Time("1", time, name);
+
+                DBtimeList.add(temp);
+            }
+
+
+            Adapter time_adapter = new Adapter(this, 0, DBtimeList);
+            lv.setAdapter(time_adapter);
+
+            Toast.makeText(this, "from DB times list", Toast.LENGTH_SHORT).show();
+        }
 
 
     }
@@ -74,36 +113,37 @@ public class MainActivity extends AppCompatActivity {
 
 
         Date now = new Date();
+        db = openHelper.getWritableDatabase();
         String time;
         String name;
         name = "Karachi";
         TimeZone.setDefault(TimeZone.getTimeZone("Asia/Karachi"));
         time = now.toString();
-        insertData(name , time);
+        insertData(name, time);
         Time t1 = new Time("KHI", time, name);
 
         TimeZone.setDefault(TimeZone.getTimeZone("Asia/Tokyo"));
         name = "Tokyo";
         time = now.toString();
-        insertData(name , time);
+        insertData(name, time);
         Time t2 = new Time("TOKYO", time, name);
 
         TimeZone.setDefault(TimeZone.getTimeZone("Canada/Pacific"));
         name = "Canada";
         time = now.toString();
-        insertData(name , time);
+        insertData(name, time);
         Time t3 = new Time("CANADA", time, name);
 
         TimeZone.setDefault(TimeZone.getTimeZone("Europe/Amsterdam"));
         name = "Amsterdam";
         time = now.toString();
-        insertData(name , time);
+        insertData(name, time);
         Time t4 = new Time("AMSTERDAM", time, name);
 
         TimeZone.setDefault(TimeZone.getTimeZone("Europe/Oslo"));
         name = "Oslo";
         time = now.toString();
-        insertData(name , time);
+        insertData(name, time);
         Time t5 = new Time("OSLO", time, name);
 
         timeList.add(t1);
@@ -113,6 +153,5 @@ public class MainActivity extends AppCompatActivity {
         timeList.add(t5);
 
     }
-
 
 }
