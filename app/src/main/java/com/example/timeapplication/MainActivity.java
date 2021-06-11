@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         dbObj = new DatabaseHelper(this);
         btn_add = findViewById(R.id.btnAdd);
 
-        if(timeList.size()!=0){
+        if (timeList.size() != 0) {
 
             timeList.removeAll(timeList);
         }
@@ -80,7 +80,6 @@ public class MainActivity extends AppCompatActivity {
                                 time_adapter.updateList();
 
 
-
                             }
                         });
 
@@ -99,17 +98,13 @@ public class MainActivity extends AppCompatActivity {
         thread.start();
 
 
-
-
-
     }
 
-    private void updateData(){
-
+    private void updateData() {
 
 
         Date now = new Date();
-      //  db = openHelper.getWritableDatabase();
+        //  db = openHelper.getWritableDatabase();
         String time;
         String name;
         name = "Karachi";
@@ -117,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
         time = now.toString();
         //insertData(name, time);
         Time temp1 = new Time("KHI", time, name);
-        timeList.set(0 , temp1);
+        timeList.set(0, temp1);
         Toast.makeText(this, temp1.getCountry_time(), Toast.LENGTH_SHORT).show();
 
 
@@ -134,9 +129,8 @@ public class MainActivity extends AppCompatActivity {
         time = now.toString();
         insertData(name, time);
         Time temp3 = new Time("CANADA", time, name);
-        timeList.set(2 , temp3);
+        timeList.set(2, temp3);
         Toast.makeText(this, temp3.getCountry_time(), Toast.LENGTH_SHORT).show();
-
 
 
         TimeZone.setDefault(TimeZone.getTimeZone("Europe/Amsterdam"));
@@ -144,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
         time = now.toString();
         insertData(name, time);
         Time temp4 = new Time("AMSTERDAM", time, name);
-        timeList.set(3 , temp4);
+        timeList.set(3, temp4);
         Toast.makeText(this, temp4.getCountry_time(), Toast.LENGTH_SHORT).show();
 
 
@@ -153,14 +147,12 @@ public class MainActivity extends AppCompatActivity {
         time = now.toString();
         insertData(name, time);
         Time temp5 = new Time("OSLO", time, name);
-        timeList.set(4 , temp5);
+        timeList.set(4, temp5);
         Toast.makeText(this, temp5.getCountry_time(), Toast.LENGTH_SHORT).show();
 
 
-
-
-
     }
+
     private void insertData(String name, String time) {
 
         ContentValues contentValues = new ContentValues();
@@ -184,15 +176,15 @@ public class MainActivity extends AppCompatActivity {
 
     private void setUpList() {
 
-       // populateData();
+        // populateData();
 
         Cursor data = dbObj.getTimesList();
-       // if (data.getCount() != 0) {
-            Toast.makeText(this, "from local list", Toast.LENGTH_SHORT).show();
-          //  populateData();
-            time_adapter = new Adapter(this, 0, timeList);
-            lv.setAdapter(time_adapter);
-           // time_adapter.updateList();
+        // if (data.getCount() != 0) {
+        Toast.makeText(this, "from local list", Toast.LENGTH_SHORT).show();
+        //  populateData();
+        time_adapter = new Adapter(this, 0, timeList);
+        lv.setAdapter(time_adapter);
+        // time_adapter.updateList();
 
         //}
 
