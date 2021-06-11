@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Adapter extends ArrayAdapter<Time> {
@@ -42,4 +43,12 @@ public class Adapter extends ArrayAdapter<Time> {
 
 
     }
+
+    public  void updateList(){
+
+        //this.timeList = timeList;
+
+        notifyDataSetChanged();
+    }
+
 }

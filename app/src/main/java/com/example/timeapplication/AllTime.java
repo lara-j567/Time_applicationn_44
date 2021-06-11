@@ -284,50 +284,50 @@ public class AllTime extends AppCompatActivity {
 
         Date now = new Date();
         TimeZone.setDefault(TimeZone.getTimeZone("US/Hawaii"));
-        Time t1 = new Time("us/Hawaii", now.toString(), "Hawaii", R.drawable.hawaii);
+        Time t1 = new Time("us/Hawaii", now.toString(), "Hawaii", R.drawable.hawaii , false);
 
         TimeZone.setDefault(TimeZone.getTimeZone("Brazil/West"));
-        Time t2 = new Time("brazil", now.toString(), "Brazil", R.drawable.brazil);
+        Time t2 = new Time("brazil", now.toString(), "Brazil", R.drawable.brazil , false);
 
         TimeZone.setDefault(TimeZone.getTimeZone("America/Mexico_City"));
-        Time t3 = new Time("mexico", now.toString(), "Mexico", R.drawable.mexico);
+        Time t3 = new Time("mexico", now.toString(), "Mexico", R.drawable.mexico,false);
 
         TimeZone.setDefault(TimeZone.getTimeZone("Asia/Bahrain"));
-        Time t4 = new Time("bahrain", now.toString(), " Bahrain ", R.drawable.bahrain);
+        Time t4 = new Time("bahrain", now.toString(), " Bahrain ", R.drawable.bahrain,false);
 
         TimeZone.setDefault(TimeZone.getTimeZone("Africa/Ceuta"));
-        Time t5 = new Time("ceuta", now.toString(), "Ceuta", R.drawable.ceuta);
+        Time t5 = new Time("ceuta", now.toString(), "Ceuta", R.drawable.ceuta,false);
 
         TimeZone.setDefault(TimeZone.getTimeZone("Cuba"));
-        Time t6 = new Time("cuba", now.toString(), "Cuba", R.drawable.cuba);
+        Time t6 = new Time("cuba", now.toString(), "Cuba", R.drawable.cuba,false);
 
         TimeZone.setDefault(TimeZone.getTimeZone("Egypt"));
-        Time t7 = new Time("egypt", now.toString(), "Egypt", R.drawable.egypt);
+        Time t7 = new Time("egypt", now.toString(), "Egypt", R.drawable.egypt,false);
 
         TimeZone.setDefault(TimeZone.getTimeZone("Iran"));
-        Time t8 = new Time("iran", now.toString(), "Iran", R.drawable.iran);
+        Time t8 = new Time("iran", now.toString(), "Iran", R.drawable.iran,false);
 
         TimeZone.setDefault(TimeZone.getTimeZone("Indian/Mauritius"));
-        Time t9 = new Time("mauritius", now.toString(), "Mauritius", R.drawable.mauritius);
+        Time t9 = new Time("mauritius", now.toString(), "Mauritius", R.drawable.mauritius,false);
 
         TimeZone.setDefault(TimeZone.getTimeZone("Asia/Macao"));
-        Time t10 = new Time("macao", now.toString(), "Macao", R.drawable.macao);
+        Time t10 = new Time("macao", now.toString(), "Macao", R.drawable.macao,false);
 
         TimeZone.setDefault(TimeZone.getTimeZone("Asia/Brunei"));
-        Time t11 = new Time("brunei", now.toString(), "Brunei", R.drawable.brunei);
+        Time t11 = new Time("brunei", now.toString(), "Brunei", R.drawable.brunei,false);
 
         TimeZone.setDefault(TimeZone.getTimeZone("Singapore"));
-        Time t12 = new Time("singapore", now.toString(), "Singapore", R.drawable.singapore);
+        Time t12 = new Time("singapore", now.toString(), "Singapore", R.drawable.singapore,false);
 
         TimeZone.setDefault(TimeZone.getTimeZone("Asia/Hong_Kong"));
-        Time t13 = new Time("hong_kong", now.toString(), "Honk Kong", R.drawable.hong_kong);
+        Time t13 = new Time("hong_kong", now.toString(), "Honk Kong", R.drawable.hong_kong,false);
 
 
         TimeZone.setDefault(TimeZone.getTimeZone("Europe/Isle_of_Man"));
-        Time t14 = new Time("isle_of_man", now.toString(), "Isle of Man", R.drawable.isle_of_man);
+        Time t14 = new Time("isle_of_man", now.toString(), "Isle of Man", R.drawable.isle_of_man,false);
 
         TimeZone.setDefault(TimeZone.getTimeZone("Asia/Riyadh"));
-        Time t15 = new Time("riyadh", now.toString(), "Riyadh", R.drawable.saudi_arabia);
+        Time t15 = new Time("riyadh", now.toString(), "Riyadh", R.drawable.saudi_arabia,false);
 
         timesList.add(t1);
         timesList.add(t2);
@@ -354,22 +354,11 @@ public class AllTime extends AppCompatActivity {
 
         //setting data in list here
         lv = findViewById(R.id.listView2);
-        AdapterTwo adapter = new AdapterTwo(this, 0, timesList);
+        /*AdapterTwo adapter = new AdapterTwo(this, 0, timesList);
         lv.setAdapter(adapter);
-
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                Time t=(Time)  parent.getItemAtPosition(position);
-                Toast.makeText(AllTime.this, "Clicked"+t.getCountry_name(), Toast.LENGTH_SHORT).show();
-                added_time.add(t);
-
-
-            }
-        });
-
-
+        */
+        final CustomAdapter adapter = new CustomAdapter(this, timesList);
+        lv.setAdapter(adapter);
 
     }
 }

@@ -8,11 +8,15 @@ public class Time implements Serializable {
     private String country_time;
     private String country_name;
     private int Image;
+    private boolean isSelected;
 
-    public Time(String id, String country_time, String country_name, int image) {
+
+
+    public Time(String id, String country_time, String country_name, int image , boolean  isSelected) {
         this.id = id;
         this.country_time = country_time;
         this.country_name = country_name;
+        this.isSelected = isSelected;
         Image = image;
     }
 
@@ -53,5 +57,13 @@ public class Time implements Serializable {
 
     public void setImage(int image) {
         Image = image;
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
     }
 }
