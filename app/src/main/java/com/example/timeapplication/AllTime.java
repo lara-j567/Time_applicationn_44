@@ -150,7 +150,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.SparseBooleanArray;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -170,6 +169,8 @@ public class AllTime extends AppCompatActivity {
     ListView lv;
     List<Time> added_time = new ArrayList<Time>();
     CheckBox checkBox;
+    CustomAdapter adapter;
+    int index=0;
 
 
 
@@ -185,12 +186,32 @@ public class AllTime extends AppCompatActivity {
         populateData();
 
         setUpList();
-
-        //grabCheckedItems();
-
-        //parseList();
-
         lv=findViewById(R.id.listView2);
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Time t = timesList.get(position);
+
+                if(t.isSelected())
+                    t.setSelected(false);
+                else
+                    t.setSelected(true);
+
+               // timesList.set(position  , t );
+                added_time.add(t);
+
+
+               Toast.makeText(AllTime.this, added_time.get(index).getCountry_name(), Toast.LENGTH_SHORT).show();
+               index++;
+               // String ti = String.valueOf(position);
+              //  Toast.makeText(AllTime.this, ti, Toast.LENGTH_SHORT).show();
+                adapter.updateList(timesList);
+              //  Toast.makeText(AllTime.this, t.getCountry_name(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
 
 
 
@@ -214,36 +235,18 @@ public class AllTime extends AppCompatActivity {
 
             }
         });
-        ;
+
 
     }
 
     private void parseList() {
 
-        for(Time d:timesList){
+        for(Time d:added_time){
 
-            Toast.makeText(this, "data "+d.getCountry_name(), Toast.LENGTH_SHORT).show();
+           Toast.makeText(this, "data "+d.getCountry_name(), Toast.LENGTH_SHORT).show();
         }
     }
-/*
-    private void grabCheckedItems() {
 
-        lv = findViewById(R.id.listView2);
-
-
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                Time t=(Time)  parent.getItemAtPosition(position);
-                Toast.makeText(AllTime.this, "Clicked"+t.getName(), Toast.LENGTH_SHORT).show();
-                added_time.add(t);
-
-
-            }
-        });
-
-    }*/
 
     private void initSearchWidget() {
 
@@ -357,7 +360,7 @@ public class AllTime extends AppCompatActivity {
         /*AdapterTwo adapter = new AdapterTwo(this, 0, timesList);
         lv.setAdapter(adapter);
         */
-        final CustomAdapter adapter = new CustomAdapter(this, timesList);
+         adapter = new CustomAdapter(this, timesList);
         lv.setAdapter(adapter);
 
     }

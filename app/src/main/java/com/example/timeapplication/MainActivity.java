@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private ListView lv;
     ArrayList<Time> timeList = new ArrayList<Time>();
     ArrayList<Time> DBtimeList = new ArrayList<Time>();
+    ArrayList<Time> modifiedtimeList = new ArrayList<Time>();
     DatabaseHelper dbObj;
     SQLiteOpenHelper openHelper;
     SQLiteDatabase db;
@@ -76,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                                 ////timeList.removeAll(timeList);
                                 //DBtimeList.removeAll(DBtimeList);
                                 updateData();
-                                Toast.makeText(MainActivity.this, "calling thread", Toast.LENGTH_SHORT).show();
+                               // Toast.makeText(MainActivity.this, "calling thread", Toast.LENGTH_SHORT).show();
                                 time_adapter.updateList();
 
 
@@ -100,6 +102,34 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode,Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(resultCode == RESULT_OK){
+
+            modifiedtimeList = (ArrayList<Time>)data.getSerializableExtra("Modified List");
+            timeList.addAll(timeList.size()-1 , modifiedtimeList);
+            Toast.makeText(this, String.valueOf(timeList.size()), Toast.LENGTH_SHORT).show();
+            //time_adapter.updateList();
+           // setUpList();
+             for (Time t:modifiedtimeList){
+
+
+                    Toast.makeText(this, t.getCountry_name(), Toast.LENGTH_SHORT).show();
+                }
+
+
+
+
+        }
+
+        else
+        {
+            Toast.makeText(this, "no data passed", Toast.LENGTH_SHORT).show();
+        }
+    }
+
     private void updateData() {
 
 
@@ -113,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
         //insertData(name, time);
         Time temp1 = new Time("KHI", time, name);
         timeList.set(0, temp1);
-        Toast.makeText(this, temp1.getCountry_time(), Toast.LENGTH_SHORT).show();
+       // Toast.makeText(this, temp1.getCountry_time(), Toast.LENGTH_SHORT).show();
 
 
         TimeZone.setDefault(TimeZone.getTimeZone("Asia/Tokyo"));
@@ -121,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
         time = now.toString();
         Time temp2 = new Time("TOKYO", time, name);
         timeList.set(1, temp2);
-        Toast.makeText(this, temp2.getCountry_time(), Toast.LENGTH_SHORT).show();
+     //   Toast.makeText(this, temp2.getCountry_time(), Toast.LENGTH_SHORT).show();
 
 
         TimeZone.setDefault(TimeZone.getTimeZone("Canada/Pacific"));
@@ -130,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
         insertData(name, time);
         Time temp3 = new Time("CANADA", time, name);
         timeList.set(2, temp3);
-        Toast.makeText(this, temp3.getCountry_time(), Toast.LENGTH_SHORT).show();
+     //   Toast.makeText(this, temp3.getCountry_time(), Toast.LENGTH_SHORT).show();
 
 
         TimeZone.setDefault(TimeZone.getTimeZone("Europe/Amsterdam"));
@@ -139,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
         insertData(name, time);
         Time temp4 = new Time("AMSTERDAM", time, name);
         timeList.set(3, temp4);
-        Toast.makeText(this, temp4.getCountry_time(), Toast.LENGTH_SHORT).show();
+      //  Toast.makeText(this, temp4.getCountry_time(), Toast.LENGTH_SHORT).show();
 
 
         TimeZone.setDefault(TimeZone.getTimeZone("Europe/Oslo"));
@@ -148,7 +178,7 @@ public class MainActivity extends AppCompatActivity {
         insertData(name, time);
         Time temp5 = new Time("OSLO", time, name);
         timeList.set(4, temp5);
-        Toast.makeText(this, temp5.getCountry_time(), Toast.LENGTH_SHORT).show();
+    //    Toast.makeText(this, temp5.getCountry_time(), Toast.LENGTH_SHORT).show();
 
 
     }
@@ -180,7 +210,7 @@ public class MainActivity extends AppCompatActivity {
 
         Cursor data = dbObj.getTimesList();
         // if (data.getCount() != 0) {
-        Toast.makeText(this, "from local list", Toast.LENGTH_SHORT).show();
+     //   Toast.makeText(this, "from local list", Toast.LENGTH_SHORT).show();
         //  populateData();
         time_adapter = new Adapter(this, 0, timeList);
         lv.setAdapter(time_adapter);

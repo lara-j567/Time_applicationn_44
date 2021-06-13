@@ -67,12 +67,12 @@ public class CustomAdapter extends BaseAdapter {
 
             if(time.isSelected())
             {
-                holder.checkBox.setImageResource(R.drawable.checked);
+                holder.checkBox.setBackgroundResource(R.drawable.checked);
             }
 
             else
             {
-                holder.checkBox.setImageResource(R.drawable.check);
+                holder.checkBox.setBackgroundResource(R.drawable.check);
             }
 
 
