@@ -51,7 +51,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent intent = new Intent(MainActivity.this, AllTime.class);
-                startActivity(intent);
+                //startActivity(intent,1);
+                startActivityForResult(intent , 1);
+
 
             }
         });
@@ -105,8 +107,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode,Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        if(resultCode == RESULT_OK){
+/*
+        if(resultCode == 1){
 
             modifiedtimeList = (ArrayList<Time>)data.getSerializableExtra("Modified List");
             timeList.addAll(timeList.size()-1 , modifiedtimeList);
@@ -127,7 +129,32 @@ public class MainActivity extends AppCompatActivity {
         else
         {
             Toast.makeText(this, "no data passed", Toast.LENGTH_SHORT).show();
+        }*/
+        if (requestCode == 1) {
+
+            if (resultCode == RESULT_OK) {
+
+                // Toast.makeText(this, "Suucess", Toast.LENGTH_SHORT).show();
+                modifiedtimeList = (ArrayList<Time>) data.getSerializableExtra("Modified List");
+                for (Time t:modifiedtimeList){
+
+
+                    Toast.makeText(this, t.getCountry_name(), Toast.LENGTH_SHORT).show();
+                }
+
+                timeList.addAll(timeList.size()-1  , modifiedtimeList);
+
+
+            } else {
+
+                Toast.makeText(this, "no succes", Toast.LENGTH_SHORT).show();
+
+
+            }
+
+
         }
+
     }
 
     private void updateData() {

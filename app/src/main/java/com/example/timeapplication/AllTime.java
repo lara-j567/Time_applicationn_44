@@ -167,7 +167,7 @@ public class AllTime extends AppCompatActivity {
 
     ArrayList<Time> timesList = new ArrayList<Time>();
     ListView lv;
-    List<Time> added_time = new ArrayList<Time>();
+    ArrayList<Time> added_time = new ArrayList<Time>();
     CheckBox checkBox;
     CustomAdapter adapter;
     int index=0;
@@ -225,7 +225,7 @@ public class AllTime extends AppCompatActivity {
 
                 Intent result_intent = new Intent(AllTime.this , MainActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("Modified List" ,timesList);
+                bundle.putSerializable("Modified List" ,added_time);
                 result_intent.putExtras(bundle);
 
                 //startActivityForResult(result_intent , RESULT_OK);
