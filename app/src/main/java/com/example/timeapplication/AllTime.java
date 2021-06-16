@@ -287,50 +287,50 @@ public class AllTime extends AppCompatActivity {
 
         Date now = new Date();
         TimeZone.setDefault(TimeZone.getTimeZone("US/Hawaii"));
-        Time t1 = new Time("us/Hawaii", now.toString(), "Hawaii", R.drawable.hawaii , false);
+        Time t1 = new Time("US/Hawaii", now.toString(), "Hawaii", R.drawable.hawaii , false);
 
         TimeZone.setDefault(TimeZone.getTimeZone("Brazil/West"));
-        Time t2 = new Time("brazil", now.toString(), "Brazil", R.drawable.brazil , false);
+        Time t2 = new Time("Brazil/West", now.toString(), "Brazil", R.drawable.brazil , false);
 
         TimeZone.setDefault(TimeZone.getTimeZone("America/Mexico_City"));
-        Time t3 = new Time("mexico", now.toString(), "Mexico", R.drawable.mexico,false);
+        Time t3 = new Time("America/Mexico_City", now.toString(), "Mexico", R.drawable.mexico,false);
 
         TimeZone.setDefault(TimeZone.getTimeZone("Asia/Bahrain"));
-        Time t4 = new Time("bahrain", now.toString(), " Bahrain ", R.drawable.bahrain,false);
+        Time t4 = new Time("Asia/Bahrain", now.toString(), " Bahrain ", R.drawable.bahrain,false);
 
         TimeZone.setDefault(TimeZone.getTimeZone("Africa/Ceuta"));
-        Time t5 = new Time("ceuta", now.toString(), "Ceuta", R.drawable.ceuta,false);
+        Time t5 = new Time("Africa/Ceuta", now.toString(), "Ceuta", R.drawable.ceuta,false);
 
         TimeZone.setDefault(TimeZone.getTimeZone("Cuba"));
-        Time t6 = new Time("cuba", now.toString(), "Cuba", R.drawable.cuba,false);
+        Time t6 = new Time("Cuba", now.toString(), "Cuba", R.drawable.cuba,false);
 
         TimeZone.setDefault(TimeZone.getTimeZone("Egypt"));
-        Time t7 = new Time("egypt", now.toString(), "Egypt", R.drawable.egypt,false);
+        Time t7 = new Time("Egypt", now.toString(), "Egypt", R.drawable.egypt,false);
 
         TimeZone.setDefault(TimeZone.getTimeZone("Iran"));
-        Time t8 = new Time("iran", now.toString(), "Iran", R.drawable.iran,false);
+        Time t8 = new Time("Iran", now.toString(), "Iran", R.drawable.iran,false);
 
         TimeZone.setDefault(TimeZone.getTimeZone("Indian/Mauritius"));
-        Time t9 = new Time("mauritius", now.toString(), "Mauritius", R.drawable.mauritius,false);
+        Time t9 = new Time("Indian/Mauritius", now.toString(), "Mauritius", R.drawable.mauritius,false);
 
         TimeZone.setDefault(TimeZone.getTimeZone("Asia/Macao"));
-        Time t10 = new Time("macao", now.toString(), "Macao", R.drawable.macao,false);
+        Time t10 = new Time("Asia/Macao", now.toString(), "Macao", R.drawable.macao,false);
 
         TimeZone.setDefault(TimeZone.getTimeZone("Asia/Brunei"));
-        Time t11 = new Time("brunei", now.toString(), "Brunei", R.drawable.brunei,false);
+        Time t11 = new Time("Asia/Brunei", now.toString(), "Brunei", R.drawable.brunei,false);
 
         TimeZone.setDefault(TimeZone.getTimeZone("Singapore"));
-        Time t12 = new Time("singapore", now.toString(), "Singapore", R.drawable.singapore,false);
+        Time t12 = new Time("Singapore", now.toString(), "Singapore", R.drawable.singapore,false);
 
         TimeZone.setDefault(TimeZone.getTimeZone("Asia/Hong_Kong"));
-        Time t13 = new Time("hong_kong", now.toString(), "Honk Kong", R.drawable.hong_kong,false);
+        Time t13 = new Time("Asia/Hong_Kong", now.toString(), "Honk Kong", R.drawable.hong_kong,false);
 
 
         TimeZone.setDefault(TimeZone.getTimeZone("Europe/Isle_of_Man"));
-        Time t14 = new Time("isle_of_man", now.toString(), "Isle of Man", R.drawable.isle_of_man,false);
+        Time t14 = new Time("Europe/Isle_of_Man", now.toString(), "Isle of Man", R.drawable.isle_of_man,false);
 
         TimeZone.setDefault(TimeZone.getTimeZone("Asia/Riyadh"));
-        Time t15 = new Time("riyadh", now.toString(), "Riyadh", R.drawable.saudi_arabia,false);
+        Time t15 = new Time("Asia/Riyadh", now.toString(), "Riyadh", R.drawable.saudi_arabia,false);
 
         timesList.add(t1);
         timesList.add(t2);

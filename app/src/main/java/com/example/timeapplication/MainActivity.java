@@ -136,18 +136,27 @@ public class MainActivity extends AppCompatActivity {
 
                 // Toast.makeText(this, "Suucess", Toast.LENGTH_SHORT).show();
                 modifiedtimeList = (ArrayList<Time>) data.getSerializableExtra("Modified List");
+/*
                 for (Time t:modifiedtimeList){
 
 
                     Toast.makeText(this, t.getCountry_name(), Toast.LENGTH_SHORT).show();
                 }
+*/
 
                 timeList.addAll(timeList.size()-1  , modifiedtimeList);
+
+                for (Time t:timeList){
+
+
+                    Toast.makeText(this, t.getCountry_name(), Toast.LENGTH_SHORT).show();
+                }
+
 
 
             } else {
 
-                Toast.makeText(this, "no succes", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "no data passed", Toast.LENGTH_SHORT).show();
 
 
             }
@@ -159,6 +168,20 @@ public class MainActivity extends AppCompatActivity {
 
     private void updateData() {
 
+        int index=0;
+        Date now = new Date();
+        String time;
+        for (Time t:timeList)
+        {
+            TimeZone.setDefault(TimeZone.getTimeZone(t.getId()));
+            time = now.toString();
+
+            Time temp = new Time(t.getId() , time , t.getCountry_name());
+            timeList.set(index, temp);
+            index++;
+        }
+
+/*
 
         Date now = new Date();
         //  db = openHelper.getWritableDatabase();
@@ -206,6 +229,7 @@ public class MainActivity extends AppCompatActivity {
         Time temp5 = new Time("OSLO", time, name);
         timeList.set(4, temp5);
     //    Toast.makeText(this, temp5.getCountry_time(), Toast.LENGTH_SHORT).show();
+*/
 
 
     }
@@ -280,31 +304,31 @@ public class MainActivity extends AppCompatActivity {
         TimeZone.setDefault(TimeZone.getTimeZone("Asia/Karachi"));
         time = now.toString();
         insertData(name, time);
-        Time t1 = new Time("KHI", time, name);
+        Time t1 = new Time("Asia/Karachi", time, name);
 
         TimeZone.setDefault(TimeZone.getTimeZone("Asia/Tokyo"));
         name = "Tokyo";
         time = now.toString();
         insertData(name, time);
-        Time t2 = new Time("TOKYO", time, name);
+        Time t2 = new Time("Asia/Tokyo", time, name);
 
         TimeZone.setDefault(TimeZone.getTimeZone("Canada/Pacific"));
         name = "Canada";
         time = now.toString();
         insertData(name, time);
-        Time t3 = new Time("CANADA", time, name);
+        Time t3 = new Time("Canada/Pacific", time, name);
 
         TimeZone.setDefault(TimeZone.getTimeZone("Europe/Amsterdam"));
         name = "Amsterdam";
         time = now.toString();
         insertData(name, time);
-        Time t4 = new Time("AMSTERDAM", time, name);
+        Time t4 = new Time("Europe/Amsterdam", time, name);
 
         TimeZone.setDefault(TimeZone.getTimeZone("Europe/Oslo"));
         name = "Oslo";
         time = now.toString();
         insertData(name, time);
-        Time t5 = new Time("OSLO", time, name);
+        Time t5 = new Time("Europe/Oslo", time, name);
 
         timeList.add(t1);
         timeList.add(t2);
